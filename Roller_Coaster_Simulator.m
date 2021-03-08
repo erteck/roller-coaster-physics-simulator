@@ -2,14 +2,14 @@
 
 %Authors: 
 
-%Erick Alberto Bustos Cruz A01378966
-%Eduardo Rodr韌uez L髉ez A01749381
-%Carlos Antonio Pazos Reyes A01378262
-% Nancy Lesly Garc韆 Jim閚ez A01378043
-% Jared Abraham Flores Guarneros A01379868
+%Erick Alberto Bustos Cruz
+%Eduardo Rodr铆guez L贸pez
+%Carlos Antonio Pazos Reyes
+% Nancy Lesly Garc铆a Jim茅nez
+% Jared Abraham Flores Guarneros
 
 function Proyecto
-    fig = uifigure("Name","Monta馻 Rusa");   %Crea el display
+    fig = uifigure("Name","Monta帽a Rusa");   %Crea el display
     ax = uiaxes("Parent",fig,"Units","pixels","Position",[5,5,400,350],"ylim",[0,45],"xlim",[0,55]);   %Crea el eje de grafica en el display
     ax_2 = uiaxes("Parent",fig,"Units","pixels","Position",[410,5,130,350],"ylim",[0,10000],"xlim",[0,10]); % Crea eje barras en display
     vel_label = uilabel(fig,"Position",[5,360,70,20],"Text","Vel. Inicial: ");  % Crea el texto de la velocidad en display
@@ -32,9 +32,9 @@ end
 function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
     %--------------------------- FUNCIONES------------------------------------
     %PRIMER TROZO
-    syms f(x)  % Se crea una funcion simb髄ica de la pista 
+    syms f(x)  % Se crea una funcion simb贸lica de la pista 
     f(x) = -(127 ./ 625) .* x .^2 + 2.8509 .* x +30;
-    dfx = diff(f,x);% Se deriva la funci髇 para su futura implementaci髇
+    dfx = diff(f,x);% Se deriva la funci贸n para su futura implementaci贸n
     d2fx = diff(dfx,x);% Se encuentra la segunda derivada
 
     %SEGUNDO TROZO
@@ -53,7 +53,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
     %-------------------------VARIABLES INICIALES------------------------------
 
     gravedad = 9.8;               % Gravedad
-    delta_t = 0.1;         % Tama駉 de paso
+    delta_t = 0.1;         % Tama帽o de paso
     v = vel.Value;                 % Velocidad inicial
     xprima = 0;            % x en eje primo
     xpos = 0;              % x en eje normal
@@ -67,7 +67,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
     friccion = -muK .* masa .*( gravedad .* cos(angulo) +  ((v.^2)./r));
     resistencia_aire = - coef_resistencia .* (v .^2);
     sumadefuerzasenxprima = peso + friccion + resistencia_aire; % Suma de fuerzas inicial 
-    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
 
 
     %--------------------------PLOTEAR PISTA-----------------------------------
@@ -87,7 +87,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
     %------------------------INICIO DE LA SIMULACION---------------------------
 
     while xpos <= 54 && xpos >= 0
-        % Simulaci髇 para f(x)
+        % Simulaci贸n para f(x)
         if (xpos >= 0) && (12 >= xpos)
        
             % Se establecen valores "-1"
@@ -125,7 +125,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
             angulo = atan(double(dfx(xpos))); 
             
             % Se calcula el valor adentro de raiz para poder hacer que el
-            % carrito cambie de direcci髇
+            % carrito cambie de direcci贸n
             adentro_raiz = ((vanterior .^2) .*(1-((muK ./ ranterior) + (coef_resistencia ./ masa)).* ...
                 (xprima - xprimaanterior)) - 2 .* gravedad .* (ypos - yposanterior) - 2 .* gravedad .* muK .* ...
                 (xpos -xposanterior))./ (1 + ((muK ./ r) + (coef_resistencia ./ masa)) .* (xprima - xprimaanterior));
@@ -143,13 +143,13 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
                     friccion = muK .* masa .*( gravedad .* cos(angulo) +  ((v.^2)./r));
                     resistencia_aire = coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = - peso - friccion - resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 else
                     peso = masa .* gravedad .* sin(angulo); % Fuerza referente al peso
                     friccion = muK .* masa .*( gravedad .* cos(angulo) +  ((v.^2)./r));
                     resistencia_aire =  coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = peso + friccion + resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 end
             end
         
@@ -190,7 +190,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
                 (xpos -xposanterior))./ (1 + sign(vanterior) .*((muK ./ r) + (coef_resistencia ./ masa)) .* (xprima - xprimaanterior)));
             angulo = atan(double(dhx(xpos))); 
             % Se calcula el valor adentro de raiz para poder hacer que el
-            % carrito cambie de direcci髇
+            % carrito cambie de direcci贸n
             adentro_raiz = ((vanterior .^2) .*(1-((muK ./ ranterior) + (coef_resistencia ./ masa)).* ...
                 (xprima - xprimaanterior)) - 2 .* gravedad .* (ypos - yposanterior) - 2 .* gravedad .* muK .* ...
                 (xpos -xposanterior))./ (1 + ((muK ./ r) + (coef_resistencia ./ masa)) .* (xprima - xprimaanterior));
@@ -208,13 +208,13 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
                     friccion = muK .* masa .*( gravedad .* cos(angulo) +  ((v.^2)./r));
                     resistencia_aire = coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = -peso - friccion - resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 else
                     peso = - masa .* gravedad .* sin(angulo); % Fuerza referente al peso
                     friccion = muK .* masa .*( gravedad .* cos(angulo) -  ((v.^2)./r));
                     resistencia_aire =  coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = peso + friccion + resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 end
             end
         end
@@ -254,7 +254,7 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
                 (xpos -xposanterior))./ (1 + sign(vanterior) .*((muK ./ r) + (coef_resistencia ./ masa)) .* (xprima - xprimaanterior)));
             angulo = atan(double(dgx(xpos))); 
             % Se calcula el valor adentro de raiz para poder hacer que el
-            % carrito cambie de direcci髇
+            % carrito cambie de direcci贸n
             adentro_raiz = ((vanterior .^2) .*(1-((muK ./ ranterior) + (coef_resistencia ./ masa)).* ...
                 (xprima - xprimaanterior)) - 2 .* gravedad .* (ypos - yposanterior) - 2 .* gravedad .* muK .* ...
                 (xpos -xposanterior))./ (1 + ((muK ./ r) + (coef_resistencia ./ masa)) .* (xprima - xprimaanterior));
@@ -272,13 +272,13 @@ function ploteoButtonPushed(ax,ax_2,coef_fr,coef_aire,vel,m_mass)
                     friccion = muK .* masa .*( gravedad .* cos(angulo) +  ((v.^2)./r));
                     resistencia_aire = coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = -peso - friccion - resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 else
                     peso = -masa .* gravedad .* sin(angulo); % Fuerza referente al peso
                     friccion = muK .* masa .*( gravedad .* cos(angulo) -  ((v.^2)./r));
                     resistencia_aire =  coef_resistencia .* (v .^2);
                     sumadefuerzasenxprima = -peso - friccion - resistencia_aire; % Suma de fuerzas inicial 
-                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci髇 inicial
+                    aprima = (sumadefuerzasenxprima) ./ masa; % Aceleraci贸n inicial
                 end
             end
         end
